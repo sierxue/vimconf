@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/zhangyiteng/.vim/bundle/rainbow_parentheses.vim'
+let g:netrw_dirhist_2='/Users/zhangyiteng/Downloads/vim-plugin-starter-kit-master/vim_plugin_starter_kit/testplugin/plugin/tests'
+let g:netrw_dirhist_3='/Users/zhangyiteng'
+let g:netrw_dirhist_4='/Users/zhangyiteng/.vim/bundle/vim-repl/plugin'
+let g:netrw_dirhist_5='/Users/zhangyiteng/.vim/vimrc/.git'
+let g:netrw_dirhist_6='/Users/zhangyiteng/.vim/bundle/LeaderF/autoload/leaderf'

@@ -5,19 +5,20 @@ let mapleader=" "
 
 filetype off                  " required
 
-" 启用vundle来管理vim插件
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
+" " 启用vundle来管理vim插件
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
 " 安装插件写在这之后
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 " Youcompleteme: 非常好用的自动补全工具
-Plugin 'https://github.com/Valloric/YouCompleteMe'
+Plug 'https://github.com/Valloric/YouCompleteMe'
 " delimitMate: 括号补全工具
-Plugin 'https://github.com/Raimondi/delimitMate'
+Plug 'https://github.com/Raimondi/delimitMate'
 " " Ctrlp: 搜索文件工具
-" Plugin 'https://github.com/kien/ctrlp.vim'
+" Plug 'https://github.com/kien/ctrlp.vim'
 " nnoremap <leader>p :CtrlP<CR>
 " nnoremap <leader>n :vsplit<CR>:CtrlP<CR>
 " set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
@@ -28,10 +29,12 @@ Plugin 'https://github.com/Raimondi/delimitMate'
 "   \ 'file': '\v\.(exe|so|dll)$',
 "   \ 'link': 'some_bad_symbolic_links',
 "   \ }
-Bundle "airblade/vim-gitgutter"
+
+Plug 'airblade/vim-gitgutter'
 set updatetime=1000
-Bundle 'Yggdroot/LeaderF'
-Bundle 'junegunn/fzf.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " Mapping selecting mappings
 " nmap <leader><tab> <plug>(fzf-maps-n)
 " xmap <leader><tab> <plug>(fzf-maps-x)
@@ -39,7 +42,7 @@ Bundle 'junegunn/fzf.vim'
 
 " Insert mode completion
 " imap <c-x><c-k> <plug>(fzf-complete-word)
-" imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-f> <plug>(fzf-complete-path)
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -47,28 +50,28 @@ command! -bang -nargs=* Ag
   \                 <bang>0)
 " imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 " imap <c-x><c-l> <plug>(fzf-complete-line)
-set rtp+=/usr/local/opt/fzf
+" set rtp+=/usr/local/opt/fzf
 " commentary: 这是一个代码注释工具
-Bundle 'https://github.com/tpope/vim-commentary'
+Plug 'https://github.com/tpope/vim-commentary'
 autocmd FileType apache setlocal commentstring=#\ %s
 autocmd FileType python setlocal commentstring=#\ %s
 " autoformat: 自动对其工具
-Plugin 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 nnoremap <F6> :Autoformat<CR>
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
-" Plugin 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 " multiple-cursors: 非常好用的格式化代码工具
-Plugin 'https://github.com/terryma/vim-multiple-cursors'
+Plug 'https://github.com/terryma/vim-multiple-cursors'
 " 文件树工具
-Plugin 'https://github.com/scrooloose/nerdtree'
+Plug 'https://github.com/scrooloose/nerdtree'
 nnoremap <leader>o :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("AsyncRun!")) | q | endif
 autocmd bufenter * if (winnr("$") == 1 && (&buftype) == "quickfix") | q | endif
 " rainbow_parentheses.vim 彩色的括号！
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 let g:rbpt_colorpairs = [
 			\ ['brown',       'RoyalBlue3'],
 			\ ['Darkblue',    'SeaGreen3'],
@@ -93,17 +96,17 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 " python 代码折叠工具
-Plugin 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold'
 let g:SimpylFold_docstring_preview=1
 autocmd FileType python nnoremap <space>z za
 " python 代码缩进
-Plugin 'vim-scripts/indentpython.vim'
+Plug 'vim-scripts/indentpython.vim'
 " 提示行末空格
-Plugin 'https://github.com/bitc/vim-bad-whitespace'
+Plug 'https://github.com/bitc/vim-bad-whitespace'
 " molikai 配色风格
-Plugin 'https://github.com/tomasr/molokai'
+Plug 'https://github.com/tomasr/molokai'
 " airline 下方提示线
-Plugin 'https://github.com/bling/vim-airline'
+Plug 'https://github.com/bling/vim-airline'
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
@@ -113,15 +116,17 @@ let g:airline_right_sep = '◀'
 let g:airline_right_alt_sep = '❮'
 let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.branch = '⎇'
+let g:ale_sign_column_always = 1
+" let g:airline#extensions#ale#enabled = 1
 
 " 是否打开tabline
 " let g:airline#extensions#tabline#enabled = 1
 " 更快的移动
-Plugin 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 nmap <leader>s <Plug>(easymotion-s)
 " 异步执行
-Plugin 'skywind3000/asyncrun.vim'
-Plugin 'w0rp/ale'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'w0rp/ale'
 " let g:ale_set_highlights = 0
 " let g:ale_fix_on_save = 1
 
@@ -134,10 +139,10 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_sign_error='✹'
 " let g:ale_sign_warning='✴'
 
-"Plugin 'sjl/gundo.vim'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'simnalamburt/vim-mundo'
+"Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'simnalamburt/vim-mundo'
 autocmd bufenter * if (winnr("$") == 2 && (bufwinnr(bufnr("__Mundo__")) !=-1 && bufwinnr(bufnr("__Mundo_Preview__")) != -1)) | call g:MundoClose() | endif
 set undofile
 set undodir=~/.vim/undo
@@ -146,15 +151,15 @@ let g:mundo_prefer_python3 = 1
 "let g:gundo_preview_height = 40
 "let g:gundo_right = 1
 nnoremap <leader>h :MundoToggle<CR>
-" Plugin 'terryma/vim-expand-region'
-Bundle 'https://github.com/kana/vim-textobj-user'
-Bundle "sgur/vim-textobj-parameter"
-" Plugin 'https://github.com/kana/vim-textobj-line'
-" Plugin 'https://github.com/kana/vim-textobj-entire'
-" Plugin 'https://github.com/kana/vim-textobj-intent'
+" Plug 'terryma/vim-expand-region'
+Plug 'https://github.com/kana/vim-textobj-user'
+Plug 'sgur/vim-textobj-parameter'
+" Plug 'https://github.com/kana/vim-textobj-line'
+" Plug 'https://github.com/kana/vim-textobj-entire'
+" Plug 'https://github.com/kana/vim-textobj-intent'
 " vmap v <Plug>(expand_region_expand)
 " vmap V <Plug>(expand_region_shrink)
-" Plugin 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
@@ -163,12 +168,12 @@ Bundle "sgur/vim-textobj-parameter"
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
-Plugin 'sillybun/setbreakpoints_python'
+Plug 'sillybun/setbreakpoints_python'
 let g:setbreakpoints_pdb = 0
 autocmd Filetype python nnoremap <F12> <Esc>:call ToggleBreakPoint()<Cr>
-Plugin 'sillybun/autoformatpythonstatement'
+Plug 'sillybun/autoformatpythonstatement'
 let g:autoformatpython_enabled = 1
-Plugin 'sillybun/vim-repl'
+Plug 'sillybun/vim-repl'
 let g:repl_program = {
 			\	"python": "python",
 			\	"default": "zsh"
@@ -178,29 +183,45 @@ nnoremap <leader>r :REPLToggle<Cr>
 " tnoremap <leader>r <C-W>:REPLToggle<Cr>
 " let g:repl_row_width = 10
 let g:repl_position = 3
-let g:repl_width = 70
-let g:termdebug_wide = 1
+" let g:repl_width = 70
+" let g:termdebug_wide = 1
 autocmd Filetype c,cpp packadd termdebug
-Plugin 'fisadev/vim-isort'
-" Plugin 'https://github.com/jpalardy/vim-slime'
-
+Plug 'fisadev/vim-isort'
+" Plug 'https://github.com/jpalardy/vim-slime'
+Plug 'jacoborus/tender.vim'
+Plug 'rakr/vim-one'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'KeitaNakamura/neodark.vim'
+Plug 'iCyMind/NeoSolarized'
+Plug 'crusoexia/vim-monokai'
+Plug 'morhetz/gruvbox'
+"
 "安装插件写在这之前
-call vundle#end()            " required
-filetype plugin on    " required
+" call vundle#end()            " required
+" filetype plugin on    " required
+call plug#end()
 
 " 常用命令
-" :PluginList       - 查看已经安装的插件
-" :PluginInstall    - 安装插件
-" :PluginUpdate     - 更新插件
-" :PluginSearch     - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
-" :PluginClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可
+" :PlugList       - 查看已经安装的插件
+" :PlugInstall    - 安装插件
+" :PlugUpdate     - 更新插件
+" :PlugSearch     - 搜索插件，例如 :PluginSearch xml就能搜到xml相关的插件
+" :PlugClean      - 删除插件，把安装插件对应行删除，然后执行这个命令即可
 
 " h: vundle         - 获取帮助
 
 "  vundle的配置到此结束，下面是你自己的配置
 "
 
-colorscheme molokai
+" colorscheme molokai
+
+" colorscheme NeoSolarized
+" colorscheme monokai
+colorscheme neodark
+" let g:neodark#terminal_transparent = 1
+" colorscheme gruvbox
+" let g:neodark#background = '#202020'
+
 
 set nocompatible
 syntax on
@@ -364,3 +385,5 @@ tnoremap <C-l> <C-w><C-l>
 " au CursorHoldI * stopinsert
 " au InsertEnter * let updaterestore=&updatetime | set updatetime=10000
 " au InsertLeave * let &updatetime=updaterestore
+
+set termguicolors
